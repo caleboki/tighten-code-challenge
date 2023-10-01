@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\V1\CapybaraController;
+use App\Http\Controllers\API\V1\ObservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,24 +26,33 @@ Route::prefix('v1')->namespace('API\V1')->group(function () {
     // Capybara routes
     Route::prefix('capybaras')->group(function () {
         // List all capybaras
-        Route::get('/', 'CapybaraController@index')->name('v1.capybaras.index');
+        Route::get('/', [CapybaraController::class, 'index'])->name('v1.capybaras.index');
 
         // Add a new capybara
-        Route::post('/', 'CapybaraController@store')->name('v1.capybaras.store');
+        Route::post('/', [CapybaraController::class, 'store'])->name('v1.capybaras.store');
 
         // Get details of a specific capybara
-        Route::get('{capybara}', 'CapybaraController@show')->name('v1.capybaras.show');
+        Route::get('{capybara}', [CapybaraController::class, 'show'])->name('v1.capybaras.show');
+
+        // Update a specific capybara
+        Route::put('{capybara}', [CapybaraController::class, 'update'])->name('v1.capybaras.update');
+
+        // Delete a specific capybara
+        Route::delete('{capybara}', [CapybaraController::class, 'destroy'])->name('v1.capybaras.destroy');
 
         // Nested routes for observations related to a specific capybara
         Route::prefix('{capybara}/observations')->group(function () {
             // Submit an observation for a specific capybara
-            Route::post('/', 'ObservationController@store')->name('v1.capybaras.observations.store');
+            Route::post('/', [CapybaraController::class, 'store'])->name('v1.capybaras.observations.store');
 
             // List all observations for a specific capybara
-            Route::get('/', 'ObservationController@index')->name('v1.capybaras.observations.index');
+            Route::get('/', [CapybaraController::class, 'index'])->name('v1.capybaras.observations.index');
 
             // Get details of a specific observation for a capybara
-            Route::get('{observation}', 'ObservationController@show')->name('v1.capybaras.observations.show');
+            Route::get('{observation}', [CapybaraController::class, 'show'])->name('v1.capybaras.observations.show');
         });
     });
+
+    Route::get('/observations', [ObservationController::class, 'allObservations'])->name('v1.observations.all');
+
 });
