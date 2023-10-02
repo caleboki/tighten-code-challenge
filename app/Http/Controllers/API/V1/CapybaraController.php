@@ -30,6 +30,7 @@ class CapybaraController extends Controller
 
     public function store(Request $request)
     {
+
         $data = $request->validate([
             'name' => 'required|unique:capybaras',
             'color' => 'required',

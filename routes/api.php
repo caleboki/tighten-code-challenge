@@ -43,13 +43,13 @@ Route::prefix('v1')->namespace('API\V1')->group(function () {
         // Nested routes for observations related to a specific capybara
         Route::prefix('{capybara}/observations')->group(function () {
             // Submit an observation for a specific capybara
-            Route::post('/', [CapybaraController::class, 'store'])->name('v1.capybaras.observations.store');
+            Route::post('/', [ObservationController::class, 'store'])->name('v1.capybaras.observations.store');
 
             // List all observations for a specific capybara
-            Route::get('/', [CapybaraController::class, 'index'])->name('v1.capybaras.observations.index');
+            Route::get('/', [ObservationController::class, 'index'])->name('v1.capybaras.observations.index');
 
             // Get details of a specific observation for a capybara
-            Route::get('{observation}', [CapybaraController::class, 'show'])->name('v1.capybaras.observations.show');
+            Route::get('{observation}', [ObservationController::class, 'show'])->name('v1.capybaras.observations.show');
         });
     });
 
