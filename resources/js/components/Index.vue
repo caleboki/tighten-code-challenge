@@ -51,7 +51,7 @@ const fetchObservations = async (url = null) => {
         observations.lastPage = response.data.meta.last_page[0];
         observations.nextPageUrl = response.data.links.next[0];
         observations.prevPageUrl = response.data.links.prev[0];
-        console.log(observations.nextPageUrl)
+
     } catch (error) {
         console.error("Failed to fetch observations:", error);
     }

@@ -33,8 +33,6 @@ const size = ref('');
 const errors = ref({});
 const successMessage = ref('');
 
-const refreshList = inject('refreshList');
-
 const resetForm = () => {
     name.value = '';
     color.value = '';

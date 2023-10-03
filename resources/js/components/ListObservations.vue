@@ -70,6 +70,7 @@ onMounted(fetchCapybaras);
 
 const getCapybaraName = (id) => {
     const capybara = capybaras.value.find(c => c.id === id);
+    console.log(capybaras)
     return capybara ? capybara.name : 'Unknown';
 };
 
