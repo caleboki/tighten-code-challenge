@@ -20,6 +20,7 @@ We would like to be able to track the daily movements of our three prized capyba
 
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [Database migrations](#database-migrations)
 - [Accessing the Application](#accessing-the-application)
 - [Testing](#testing)
 - [API Documentation](#api-documentation)
@@ -38,8 +39,33 @@ We would like to be able to track the daily movements of our three prized capyba
 5. Create a testing environment file: `cp .env.example .env.testing`
 6. Start Laravel Sail: `./vendor/bin/sail up -d`
 7. Generate an application key: `./vendor/bin/sail artisan key:generate`
-8. Run database migrations: `./vendor/bin/sail artisan migrate`
-9. Seed database: `./vendor/bin/sail artisan db:seed`
+8. Install Node dependences: `./vendor/bin/sail npm install`
+9. Serve the frontend: `npm run dev`
+
+## Database migrations
+
+In the `.env` file replace the corresponding database credentials with:
+```
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=tighten_code_challenge
+DB_USERNAME=sail
+DB_PASSWORD=password
+```
+
+For the `env.testing` file replace the corresponding database credentials with:
+```
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=testing
+DB_USERNAME=sail
+DB_PASSWORD=password
+```
+
+Then run the database migrations: `./vendor/bin/sail artisan migrate` and seed database: `./vendor/bin/sail artisan db:seed`
+
 ## Accessing the Application
 
 1. Access the API: With the Docker containers running, you can now access the API endpoints using your an API client (such as Postman or Insomnia). The API base URL is `http://localhost/api/v1`.
@@ -48,7 +74,7 @@ We would like to be able to track the daily movements of our three prized capyba
 
 ## Testing
 
-To run the test suite for the application, open a new terminal window, navigate to the project directory, and run the following command: `./vendor/bin/sail test`. This will execute the PHPUnit test suite and display the results in your terminal.
+To run the test suite for the application, open a new terminal window, navigate to the project directory, and run the command: `./vendor/bin/sail test`. This will execute the PHPUnit test suite and display the results in the terminal.
 
 ## API Documentation
 
