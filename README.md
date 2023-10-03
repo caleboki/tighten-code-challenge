@@ -40,7 +40,7 @@ We would like to be able to track the daily movements of our three prized capyba
 6. Start Laravel Sail: `./vendor/bin/sail up -d`
 7. Generate an application key: `./vendor/bin/sail artisan key:generate`
 8. Install Node dependences: `./vendor/bin/sail npm install`
-9. Serve the frontend: `npm run dev`
+9. Serve the frontend: `./vendor/bin/sail npm run dev`
 
 ## Database migrations
 
@@ -64,7 +64,9 @@ DB_USERNAME=sail
 DB_PASSWORD=password
 ```
 
-Then run the database migrations: `./vendor/bin/sail artisan migrate` and seed database: `./vendor/bin/sail artisan db:seed`
+Then in a new terminal: 
+1. Run the database migrations: `./vendor/bin/sail artisan migrate:refresh` or `./vendor/bin/sail artisan migrate` if the daatabase does not exist already
+2. Seed the database: `./vendor/bin/sail artisan db:seed`
 
 ## Accessing the Application
 
@@ -76,7 +78,7 @@ Then run the database migrations: `./vendor/bin/sail artisan migrate` and seed d
 
 ## Testing
 
-To run the test suite for the application, open a new terminal window, in the project directory, run the command: `./vendor/bin/sail test`. This will execute the PHPUnit test suite and display the results in the terminal.
+To run the test suite for the application, open a new terminal window, in the project directory, run the command: `./vendor/bin/sail test`. This will execute the PHPUnit test suite and display the results in the terminal. If you encounter an error such as ` MissingAppKeyException: No application encryption key has been specified` while running the tests, run `./vendor/bin/sail php artisan config:cache` to clear cache.
 
 ## API Documentation
 
