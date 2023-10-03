@@ -52,4 +52,9 @@ To run the test suite for the application, open a new terminal window, navigate 
 
 ## API Documentation
 
-The API documentation provides a comprehensive and interactive overview of all available endpoints, request parameters, and response formats. You can access the interactive API documentation at: http://localhost/api/documentation
+The API documentation provides a comprehensive and interactive overview of all available endpoints, request parameters, and response formats. Some of the endpoints are:
+
+- `GET /v1/capybaras`: List all capybaras.
+- `POST /v1/capybaras`: Add a new capybara.
+
+You can access details of the other endpoints and an interactive API documentation at: http://localhost/api/documentation
