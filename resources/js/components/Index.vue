@@ -36,7 +36,7 @@ import ListObservations from './ListObservations.vue';
 import api from '../services/api';
 
 const observations = reactive({ data: [], currentPage: 1, lastPage: 1, nextPageUrl: null, prevPageUrl: null });
-
+const capybaras = reactive({ data: [] });
 
 const fetchObservations = async (url = null) => {
     try {
@@ -54,6 +54,15 @@ const fetchObservations = async (url = null) => {
 
     } catch (error) {
         console.error("Failed to fetch observations:", error);
+    }
+};
+
+const fetchCapybaras = async () => {
+    try {
+        const response = await api.listCapybaras();
+        capybaras.data = response.data.data;
+    } catch (error) {
+        console.error("Failed to fetch capybaras:", error);
     }
 };
 
@@ -75,6 +84,11 @@ provide('refreshCapybaras', refreshCapybaras);
 provide('fetchObservations', fetchObservations);
 provide('observations', observations);
 
-onMounted(fetchObservations);
+onMounted(() => {
+    fetchCapybaras();
+    fetchObservations();
+});
+
+provide('capybaras', capybaras);
 
 </script>

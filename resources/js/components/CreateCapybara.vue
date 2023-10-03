@@ -40,11 +40,16 @@ const resetForm = () => {
     errors.value = {};
 };
 
+const capybaras = inject('capybaras');
 const refreshCapybaras = inject('refreshCapybaras');
 
 const create = async () => {
     try {
-        await api.createCapybara({ name: name.value, color: color.value, size: size.value });
+        //await api.createCapybara({ name: name.value, color: color.value, size: size.value });
+        const response = await api.createCapybara({ name: name.value, color: color.value, size: size.value });
+        console.log(capybaras)
+        const newCapybara = response.data;
+        capybaras.data.push(newCapybara.data);
         successMessage.value = 'A new Capybara was created successfully!';
         // Clear the form
         resetForm();
@@ -53,6 +58,7 @@ const create = async () => {
             successMessage.value = '';
         }, 3000);
         refreshCapybaras();
+        return response.data;
 
     } catch (error) {
         errors.value = error.response.data.errors;

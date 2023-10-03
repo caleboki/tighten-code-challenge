@@ -52,7 +52,8 @@ const date = ref('');
 const city = ref('');
 const hat = ref(false);
 const errors = ref({});
-const capybaras = ref([]); // This will hold the list of capybaras
+const capybaras = inject('capybaras');
+
 const successMessage = ref('');
 
 const fetchCapybaras = async () => {
@@ -86,6 +87,8 @@ const submitObservation = async () => {
         });
 
         successMessage.value = 'Observation added successfully!';
+        const capybara = await api.getCapybaraById(capybaraId.value); // Fetch the Capybara details
+        capybaras.value.push(capybara.data); // Add the fetched Capybara to the local list
 
         // Clear the form
         resetForm();
@@ -93,6 +96,7 @@ const submitObservation = async () => {
         setTimeout(() => {
             successMessage.value = '';
         }, 3000);
+
 
 
     } catch (error) {
@@ -111,6 +115,6 @@ const isFormValid = computed(() => {
 
 // Fetch the list of capybaras when the component is mounted
 onMounted(() => {
-    fetchCapybaras();
+    //fetchCapybaras();
 });
 </script>

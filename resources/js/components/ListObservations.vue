@@ -54,7 +54,7 @@ const props = defineProps({
     }
 });
 
-const capybaras = ref([]);
+const capybaras = inject('capybaras');
 
 const fetchCapybaras = async () => {
     try {
@@ -69,7 +69,8 @@ const fetchCapybaras = async () => {
 onMounted(fetchCapybaras);
 
 const getCapybaraName = (id) => {
-    const capybara = capybaras.value.find(c => c.id === id);
+    //const capybara = capybaras.value.find(c => c.id === id);
+    const capybara = capybaras.data.find(c => c.id === id);
     return capybara ? capybara.name : 'Unknown';
 };
 
