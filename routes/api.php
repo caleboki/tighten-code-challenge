@@ -26,9 +26,38 @@ Route::prefix('v1')->namespace('API\V1')->group(function () {
     // Capybara routes
     Route::prefix('capybaras')->group(function () {
         // List all capybaras
+        /**
+         * @OA\Get(
+         *     path="/v1/capybaras",
+         *     summary="List all capybaras",
+         *     tags={"Capybaras"},
+         *     @OA\Response(
+         *         response=200,
+         *         description="Successful operation",
+         *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Capybara"))
+         *     )
+         * )
+         */
         Route::get('/', [CapybaraController::class, 'index'])->name('v1.capybaras.index');
 
         // Add a new capybara
+        /**
+         * @OA\Post(
+         *     path="/v1/capybaras",
+         *     summary="Add a new capybara",
+         *     tags={"Capybaras"},
+         *     @OA\RequestBody(
+         *         description="Capybara data",
+         *         required=true,
+         *         @OA\JsonContent(ref="#/components/schemas/Capybara")
+         *     ),
+         *     @OA\Response(
+         *         response=201,
+         *         description="Capybara created successfully",
+         *         @OA\JsonContent(ref="#/components/schemas/Capybara")
+         *     )
+         * )
+         */
         Route::post('/', [CapybaraController::class, 'store'])->name('v1.capybaras.store');
 
         // Get details of a specific capybara
@@ -47,12 +76,21 @@ Route::prefix('v1')->namespace('API\V1')->group(function () {
 
             // List all observations for a specific capybara
             Route::get('/', [ObservationController::class, 'index'])->name('v1.capybaras.observations.index');
-
-            // Get details of a specific observation for a capybara
-            Route::get('{observation}', [ObservationController::class, 'show'])->name('v1.capybaras.observations.show');
         });
     });
 
+    /**
+     * @OA\Get(
+     *     path="/v1/observations",
+     *     summary="List all observations",
+     *     tags={"Observations"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Observation"))
+     *     )
+     * )
+     */
     Route::get('/observations', [ObservationController::class, 'allObservations'])->name('v1.observations.all');
 
 });

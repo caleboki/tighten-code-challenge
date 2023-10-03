@@ -1,0 +1,331 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Capybara API",
+        "description": "API for tracking Capybara observations",
+        "contact": {
+            "email": "caleboki@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/capybaras": {
+            "get": {
+                "summary": "Get a list of all capybaras",
+                "operationId": "3365e98035ff1f1b7a81927a4323c1c5",
+                "responses": {
+                    "200": {
+                        "description": "List of capybaras",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Capybara"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new capybara",
+                "operationId": "d467c2b6081a95acbc0249af96c48a75",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Capybara"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Capybara created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Capybara"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/capybaras/{capybaraId}": {
+            "get": {
+                "summary": "Get details of a specific capybara",
+                "operationId": "de904e6bf887531b620670ae5ee66443",
+                "parameters": [
+                    {
+                        "name": "capybaraId",
+                        "in": "path",
+                        "description": "ID of the capybara to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Details of the capybara",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Capybara"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update details of a specific capybara",
+                "operationId": "791d6902f28d2f9a42720a8014d3ee7b",
+                "parameters": [
+                    {
+                        "name": "capybaraId",
+                        "in": "path",
+                        "description": "ID of the capybara to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Capybara"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Capybara updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Capybara"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a specific capybara",
+                "operationId": "65b439a606c3462d066d1298e46ca0a9",
+                "parameters": [
+                    {
+                        "name": "capybaraId",
+                        "in": "path",
+                        "description": "ID of the capybara to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Capybara deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Capybara deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/capybaras/{capybaraId}/observations": {
+            "get": {
+                "summary": "Get a list of observations for a specific capybara",
+                "operationId": "92f52ee3f8b2360eb01ca0d558b017d2",
+                "parameters": [
+                    {
+                        "name": "capybaraId",
+                        "in": "path",
+                        "description": "ID of the capybara to retrieve observations for",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of observations for the capybara",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Observation"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Submit a new observation for a specific capybara",
+                "operationId": "0646519399236168025c1f85f6ff49e2",
+                "parameters": [
+                    {
+                        "name": "capybaraId",
+                        "in": "path",
+                        "description": "ID of the capybara to submit an observation for",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Observation"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Observation submitted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Observation"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/observations": {
+            "get": {
+                "summary": "Get a list of all observations",
+                "operationId": "fc6f0ccf6ef32610e2b57ea26e142305",
+                "responses": {
+                    "200": {
+                        "description": "List of observations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Observation"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Capybara": {
+                "required": [
+                    "name",
+                    "color",
+                    "size"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "The unique identifier of the capybara",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "The name of the capybara",
+                        "type": "string"
+                    },
+                    "color": {
+                        "description": "The color of the capybara",
+                        "type": "string"
+                    },
+                    "size": {
+                        "description": "The size of the capybara",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "The date and time when the capybara was created",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "The date and time when the capybara was last updated",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Observation": {
+                "required": [
+                    "capybara_id",
+                    "date",
+                    "city"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "The unique identifier of the observation",
+                        "type": "integer"
+                    },
+                    "capybara_id": {
+                        "description": "The ID of the observed capybara",
+                        "type": "integer"
+                    },
+                    "date": {
+                        "description": "The date of the observation",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "city": {
+                        "description": "The city where the capybara was observed",
+                        "type": "string"
+                    },
+                    "hat": {
+                        "description": "Indicates if the capybara was wearing a hat",
+                        "type": "boolean"
+                    },
+                    "created_at": {
+                        "description": "The date and time when the observation was created",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "The date and time when the observation was last updated",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

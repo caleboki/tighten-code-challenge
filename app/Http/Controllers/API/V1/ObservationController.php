@@ -13,17 +13,51 @@ use Illuminate\Validation\Rule;
 
 class ObservationController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/api/v1/capybaras/{capybaraId}/observations",
+     *     summary="Get a list of observations for a specific capybara",
+     *     @OA\Parameter(
+     *         name="capybaraId",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the capybara to retrieve observations for",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of observations for the capybara",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Observation"))
+     *     )
+     * )
+     */
     public function index(Capybara $capybara)
     {
         $observations = $capybara->observations;
         return ObservationResource::collection($observations);
     }
 
-    public function show(Observation $observation)
-    {
-        return new ObservationResource($observation);
-    }
-
+    /**
+     * @OA\Post(
+     *     path="/api/v1/capybaras/{capybaraId}/observations",
+     *     summary="Submit a new observation for a specific capybara",
+     *     @OA\Parameter(
+     *         name="capybaraId",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the capybara to submit an observation for",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(ref="#/components/schemas/Observation")
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Observation submitted successfully",
+     *         @OA\JsonContent(ref="#/components/schemas/Observation")
+     *     )
+     * )
+     */
     public function store(Request $request, Capybara $capybara)
     {
         // Convert the incoming city request value to lowercase
@@ -61,7 +95,20 @@ class ObservationController extends Controller
         return new ObservationResource($observation);
     }
 
-
+    /**
+     * @OA\Get(
+     *     path="/api/v1/observations",
+     *     summary="Get a list of all observations",
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of observations",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Observation")
+     *         )
+     *     )
+     * )
+     */
     public function allObservations()
     {
         $observations = Observation::orderBy('created_at', 'desc')->paginate(10);
