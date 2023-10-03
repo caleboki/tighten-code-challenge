@@ -70,11 +70,13 @@ Then run the database migrations: `./vendor/bin/sail artisan migrate` and seed d
 
 1. Access the API: With the Docker containers running, you can now access the API endpoints using your an API client (such as Postman or Insomnia). The API base URL is `http://localhost/api/v1`.
 
-2. Stopping the Application: When you are done using the application, you can stop the Docker containers by running the following command in your terminal: `./vendor/bin/sail down`. This will stop and remove all running containers.
+2. Access the UI/frontend of the application at `http://localhost`
+
+3. Stopping the Application: You can stop the Docker containers by running the command in the terminal: `./vendor/bin/sail down`. This will stop and remove all running containers.
 
 ## Testing
 
-To run the test suite for the application, open a new terminal window, navigate to the project directory, and run the command: `./vendor/bin/sail test`. This will execute the PHPUnit test suite and display the results in the terminal.
+To run the test suite for the application, open a new terminal window, in the project directory, run the command: `./vendor/bin/sail test`. This will execute the PHPUnit test suite and display the results in the terminal.
 
 ## API Documentation
 
